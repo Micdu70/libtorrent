@@ -896,7 +896,7 @@ DhtServer::process_queue(packet_queue& queue, uint32_t* quota) {
 void
 DhtServer::event_write() {
   if (m_highQueue.empty() && m_lowQueue.empty())
-    throw internal_error("DhtServer::event_write called but both write queues are empty.");
+    lt_log_print(torrent::LOG_THREAD_NOTICE, "DhtServer::event_write called with both queues empty.", 0);
 
   if (!m_uploadThrottle->is_throttled(&m_uploadNode))
     throw internal_error("DhtServer::event_write called while not in throttle list.");
